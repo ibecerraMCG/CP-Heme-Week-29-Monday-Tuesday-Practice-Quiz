@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 29 Monday & Tuesday Practice Quiz</title>
+    <style>
+        /* --- CSS Variables & Themes --- */
+        :root {
+            /* Base Transition */
+            --transition-speed: 0.3s;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 1. Modern Dark (Default) */
+        [data-theme="dark"] {
+            --bg-body: #1e293b;
+            --bg-card: #334155;
+            --bg-header: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-accent: #38bdf8;
+            --border-color: #475569;
+            --highlight-bg: #475569;
+            --button-bg: #38bdf8;
+            --button-text: #0f172a;
+            --button-hover: #0ea5e9;
+            --feedback-success-bg: #064e3b;
+            --feedback-success-border: #059669;
+            --feedback-success-text: #a7f3d0;
+            --feedback-error-bg: #7f1d1d;
+            --feedback-error-border: #dc2626;
+            --feedback-error-text: #fecaca;
+        }
+
+        /* 2. Modern Light */
+        [data-theme="light"] {
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --text-accent: #2563eb;
+            --border-color: #e5e7eb;
+            --highlight-bg: #f3f4f6;
+            --button-bg: #2563eb;
+            --button-text: #ffffff;
+            --button-hover: #1d4ed8;
+            --feedback-success-bg: #ecfdf5;
+            --feedback-success-border: #34d399;
+            --feedback-success-text: #065f46;
+            --feedback-error-bg: #fef2f2;
+            --feedback-error-border: #f87171;
+            --feedback-error-text: #991b1b;
+        }
+
+        /* 3. Midnight (Pure Black) */
+        [data-theme="midnight"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --text-accent: #90caf9;
+            --border-color: #333333;
+            --highlight-bg: #1a1a1a;
+            --button-bg: #90caf9;
+            --button-text: #000000;
+            --button-hover: #42a5f5;
+            --feedback-success-bg: #051b11;
+            --feedback-success-border: #0f5132;
+            --feedback-success-text: #75b798;
+            --feedback-error-bg: #2c0b0e;
+            --feedback-error-border: #842029;
+            --feedback-error-text: #ea868f;
+        }
+
+        /* 4. Legacy Dark (Original) */
+        [data-theme="legacy-dark"] {
+            --bg-body: #2d343e;
+            --bg-card: #3c424f;
+            --bg-header: #3c424f;
+            --text-main: #e8e6e3;
+            --text-muted: #b0c4de;
+            --text-accent: #8ab4f8;
+            --border-color: #555;
+            --highlight-bg: #454c5a;
+            --button-bg: #8ab4f8;
+            --button-text: #202124;
+            --button-hover: #a3c5f9;
+            --feedback-success-bg: #344e41;
+            --feedback-success-border: #52b788;
+            --feedback-success-text: #c7f9cc;
+            --feedback-error-bg: #5e2129;
+            --feedback-error-border: #a4133c;
+            --feedback-error-text: #f8d7da;
+        }
+
+        /* 5. Sepia (Reading Mode) */
+        [data-theme="sepia"] {
+            --bg-body: #f4ecd8;
+            --bg-card: #fdf6e3;
+            --bg-header: #e4d5b7;
+            --text-main: #433422;
+            --text-muted: #7c6f5a;
+            --text-accent: #a05a2c;
+            --border-color: #d3c4a5;
+            --highlight-bg: #ebe1c9;
+            --button-bg: #a05a2c;
+            --button-text: #fdf6e3;
+            --button-hover: #864822;
+            --feedback-success-bg: #e6f4ea;
+            --feedback-success-border: #8ab893;
+            --feedback-success-text: #2e4c35;
+            --feedback-error-bg: #f9e3e3;
+            --feedback-error-border: #d48f8f;
+            --feedback-error-text: #5c2b2b;
+        }
+
+        /* 6. High Contrast */
+        [data-theme="contrast"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #ffffff;
+            --text-muted: #dddddd;
+            --text-accent: #ffff00;
+            --border-color: #ffffff;
+            --highlight-bg: #333333;
+            --button-bg: #ffff00;
+            --button-text: #000000;
+            --button-hover: #e6e600;
+            --feedback-success-bg: #000000;
+            --feedback-success-border: #00ff00;
+            --feedback-success-text: #00ff00;
+            --feedback-error-bg: #000000;
+            --feedback-error-border: #ff0000;
+            --feedback-error-text: #ff0000;
+        }
+
+        /* --- Global Reset & Layout --- */
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Default to Sticky */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Class to remove sticky behavior */
+        header.unpinned {
+            position: relative;
+            box-shadow: none;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--text-accent);
+        }
+
+        .controls-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pin-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .pin-btn:hover {
+            background-color: var(--highlight-bg);
+        }
+
+        .pin-btn.pin-active {
+            color: var(--text-accent);
+            border-color: var(--text-accent);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        select#theme-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* --- Main Content --- */
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem 4rem 1rem;
+        }
+
+        .section-header {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-accent);
+            color: var(--text-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* --- Question Card --- */
+        .question-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .lo-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--text-accent);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Options --- */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: var(--highlight-bg);
+            border-color: var(--text-muted);
+        }
+
+        .option-label input {
+            margin-top: 0.3rem;
+            margin-right: 1rem;
+            accent-color: var(--text-accent);
+            transform: scale(1.2);
+        }
+
+        /* --- Buttons --- */
+        .btn-check {
+            margin-top: 1.5rem;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-check:hover {
+            opacity: 0.9;
+        }
+
+        /* --- Feedback Area --- */
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+            border: 1px solid transparent;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background-color: var(--feedback-success-bg);
+            border-color: var(--feedback-success-border);
+            color: var(--feedback-success-text);
+        }
+
+        .feedback.incorrect {
+            background-color: var(--feedback-error-bg);
+            border-color: var(--feedback-error-border);
+            color: var(--feedback-error-text);
+        }
+
+        .feedback-header {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .rationale {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .source {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: italic;
+            border-top: 1px dashed currentColor;
+            padding-top: 0.5rem;
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 600px) {
+            header { padding: 1rem; flex-direction: column; gap: 10px; align-items: flex-start; }
+            .controls-wrapper { width: 100%; justify-content: space-between; }
+            .question-card { padding: 1.5rem; }
+            header h1 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <h1>Week 29 Monday & Tuesday Practice Quiz</h1>
+        <div class="controls-wrapper">
+            <!-- Pin Button -->
+            <button class="pin-btn pin-active" id="pin-btn" onclick="toggleHeader()" title="Pin/Unpin Header">
+                📍
+            </button>
+            
+            <div class="theme-control">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select" onchange="changeTheme(this.value)">
+                    <option value="dark">Modern Dark</option>
+                    <option value="midnight">Midnight</option>
+                    <option value="light">Modern Light</option>
+                    <option value="legacy-dark">Legacy Dark</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="contrast">High Contrast</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="quiz-root">
+        <!-- Content injected via JS -->
+    </div>
+
+    <script>
+        // --- Data ---
+        const quizData = [
+            // --- Section 1: Superficial and Deep Neck ---
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO1: Describe the superficial veins and [fluid] drainage of the neck.",
+                fullLO: "LO1: Describe the superficial veins and lymphatic drainage of the neck.",
+                question: "A 25-year-old male presents with a superficial laceration on the lateral aspect of the neck. The physician notes injury to a vein that travels on the superficial surface of the sternocleidomastoid muscle. This vessel drains directly into which of the following structures?",
+                options: {
+                    A: "Anterior jugular vein",
+                    B: "Brachiocephalic vein",
+                    C: "Internal jugular vein",
+                    D: "Subclavian vein",
+                    E: "Superior vena cava"
+                },
+                correctAnswer: "D",
+                rationale: "The external jugular vein travels on the superficial surface of the sternocleidomastoid muscle and drains into the subclavian vein.",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 43: \"External jugular vein... Travels on superficial surface of sternocleidomastoid muscle... Drains to subclavian vein\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO1: Describe the superficial veins and [fluid] drainage of the neck.",
+                fullLO: "LO1: Describe the superficial veins and lymphatic drainage of the neck.",
+                question: "A patient presents with an infection on the skin of the anterior neck. Lymph from this superficial tissue flows initially to the superficial cervical lymph nodes. To which group of lymph nodes does the lymph flow next?",
+                options: {
+                    A: "Axillary lymph nodes",
+                    B: "Inferior deep cervical lymph nodes",
+                    C: "Parotracheal lymph nodes",
+                    D: "Submandibular lymph nodes",
+                    E: "Submental lymph nodes"
+                },
+                correctAnswer: "B",
+                rationale: "Lymph from the superficial cervical lymph nodes (which drain the superficial tissues) drains into the inferior deep cervical lymph nodes.",
+                source: "Superficial_and_Deep_Neck.pdf, Page 100: \"Lymph from superficial cervical lymph nodes drains into the inferior deep cervical lymph nodes, located along the internal jugular veins.\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO2: Describe the course of the common carotid artery... and external carotid artery and its principal branches...",
+                fullLO: "LO2: Describe the course of the common carotid artery, internal carotid artery, and external carotid artery and its principal branches...",
+                question: "A surgeon performs a procedure in the neck and identifies the bifurcation of the common carotid artery. A small chemoreceptor structure is noted at the angle of this bifurcation. This structure is innervated by which of the following nerves?",
+                options: {
+                    A: "Ansa cervicalis",
+                    B: "Facial nerve (CN VII)",
+                    C: "Glossopharyngeal nerve (CN IX)",
+                    D: "Hypoglossal nerve (CN XII)",
+                    E: "Spinal accessory nerve (CN XI)"
+                },
+                correctAnswer: "C",
+                rationale: "The structure described is the carotid body (chemoreceptor). Both the carotid body and the carotid sinus are innervated by the glossopharyngeal nerve (CN IX).",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 38: \"Carotid body... Located at angle of carotid bifurcation... Both are innervated by glossopharyngeal nerve (CN IX)\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO2: Describe the course of the common carotid artery... and external carotid artery and its principal branches...",
+                fullLO: "LO2: Describe the course of the common carotid artery, internal carotid artery, and external carotid artery and its principal branches...",
+                question: "A patient requires ligation of the external carotid artery to control bleeding. Which of the following arteries is a direct branch of the external carotid artery that supplies the thyroid gland?",
+                options: {
+                    A: "Ascending cervical artery",
+                    B: "Inferior thyroid artery",
+                    C: "Superior thyroid artery",
+                    D: "Thyrocervical trunk",
+                    E: "Transverse cervical artery"
+                },
+                correctAnswer: "C",
+                rationale: "The superior thyroid artery is the first branch of the external carotid artery. (Note: The inferior thyroid artery arises from the thyrocervical trunk of the subclavian artery).",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 41 & Page 93: \"External Carotid Artery... 8 branches: 1. Superior thyroid artery\" & \"Superior thyroid artery – branch of the external carotid artery\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO3: Describe the course... and structures innervated by the vagus nerve (CN X), phrenic nerve...",
+                fullLO: "LO3: Describe the course, major branches, and structures innervated by the vagus nerve (CN X), phrenic nerve, brachial plexus, and ansa cervicalis...",
+                question: "A 45-year-old female undergoes a thyroidectomy. Postoperatively, she presents with hoarseness. Laryngoscopy reveals paralysis of a vocal fold. Which nerve, responsible for innervating the intrinsic muscles of the larynx (except the cricothyroid), was likely injured as it ascended in the tracheoesophageal groove?",
+                options: {
+                    A: "External laryngeal nerve",
+                    B: "Internal laryngeal nerve",
+                    C: "Recurrent laryngeal nerve",
+                    D: "Spinal accessory nerve",
+                    E: "Superior laryngeal nerve"
+                },
+                correctAnswer: "C",
+                rationale: "The recurrent laryngeal nerve ascends in the tracheoesophageal groove and innervates the intrinsic muscles of the larynx (except the cricothyroid). Injury results in hoarseness.",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 52 & Page 94: \"Both ascend in the tracheoesophageal groove, enter the larynx, and become inferior laryngeal nerves... innervate the intrinsic muscles of the larynx (except cricothyroid)\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO3: Describe the course... and structures innervated by the vagus nerve (CN X), phrenic nerve...",
+                fullLO: "LO3: Describe the course, major branches, and structures innervated by the vagus nerve (CN X), phrenic nerve, brachial plexus, and ansa cervicalis...",
+                question: "A patient presents with miosis, ptosis, and anhidrosis on the right side of the face (Horner’s syndrome). This clinical presentation is most consistent with a lesion of which structure located anterolateral to the vertebral column?",
+                options: {
+                    A: "Ansa cervicalis",
+                    B: "Carotid body",
+                    C: "Cervical sympathetic trunk",
+                    D: "Phrenic nerve",
+                    E: "Vagus nerve"
+                },
+                correctAnswer: "C",
+                rationale: "The cervical portion of the sympathetic trunk lies anterolateral to the vertebral column. A lesion here results in Horner’s syndrome (miosis, ptosis, anhidrosis).",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 57 & Page 96: \"Cervical portion of sympathetic trunks lie anterolateral to vertebral column... Lesion of the cervical sympathetic trunk may occur... results in a sympathetic disturbance called Horner’s syndrome\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO4: Identify and describe the action and innervation of the major muscles of the neck...",
+                fullLO: "LO4: Identify and describe the action and innervation of the major muscles of the neck...",
+                question: "A patient presents with weakness in elevating the left shoulder and difficulty turning the head to the right against resistance. The physician suspects injury to a nerve that courses through the posterior cervical triangle. Which muscle is primarily affected to cause the head-turning deficit?",
+                options: {
+                    A: "Anterior scalene",
+                    B: "Levator scapulae",
+                    C: "Splenius capitis",
+                    D: "Sternocleidomastoid",
+                    E: "Trapezius"
+                },
+                correctAnswer: "D",
+                rationale: "The spinal accessory nerve (CN XI) innervates the sternocleidomastoid (SCM) and trapezius. The SCM is responsible for contralateral rotation of the head (turning neck to the opposite side).",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 53 & Page 96: \"Spinal Accessory Nerve... Innervates sternocleidomastoid and trapezius muscles... weakness in... rotary movements of the neck to the opposite side\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO4: Identify and describe the action and innervation of the major muscles of the neck...",
+                fullLO: "LO4: Identify and describe the action and innervation of the major muscles of the neck...",
+                question: "During a physical exam, a patient is asked to flex their neck laterally. Which of the following muscles, innervated by the anterior rami of cervical spinal nerves, aids in ipsilateral lateral flexion of the cervical spine?",
+                options: {
+                    A: "Digastric",
+                    B: "Mylohyoid",
+                    C: "Omohyoid",
+                    D: "Scalene muscles",
+                    E: "Sternothyroid"
+                },
+                correctAnswer: "D",
+                rationale: "The scalene muscles (anterior, middle, posterior) function unilaterally to cause ipsilateral lateral flexion of the cervical spine. They are innervated by anterior rami of spinal nerves.",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 21: \"Scalene muscles... Functions... Unilateral: Ipsilateral lateral flexion of cervical spine (neck)\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO5: Describe the root of the neck and trace the course and branches of the [specific vessels].",
+                fullLO: "LO5: Describe the root of the neck and trace the course and branches of the subclavian artery and vein.",
+                question: "A radiologist reviews an angiogram of the root of the neck. She identifies the thyrocervical trunk arising from the subclavian artery. From which part of the subclavian artery does this trunk typically originate relative to the anterior scalene muscle?",
+                options: {
+                    A: "First part (medial to the muscle)",
+                    B: "Second part (posterior to the muscle)",
+                    C: "Third part (lateral to the muscle)",
+                    D: "Fourth part (inferior to the muscle)",
+                    E: "It arises from the axillary artery"
+                },
+                correctAnswer: "A",
+                rationale: "The thyrocervical trunk is a branch of the 1st part of the subclavian artery, which is located medial to the anterior scalene muscle.",
+                source: "Superficial_and_Deep_Neck.pdf, Page 99: \"1st part: (medial to the anterior scalene muscle)... Thyrocervical trunk\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO5: Describe the root of the neck and trace the course and branches of the [specific vessels].",
+                fullLO: "LO5: Describe the root of the neck and trace the course and branches of the subclavian artery and vein.",
+                question: "A surgeon is placing a central venous line into the subclavian vein. To avoid injury to the subclavian artery, the surgeon must understand the relationship of these vessels to the anterior scalene muscle. Which of the following correctly describes this relationship?",
+                options: {
+                    A: "Both vessels pass anterior to the anterior scalene.",
+                    B: "Both vessels pass posterior to the anterior scalene.",
+                    C: "The artery passes anterior, and the vein passes posterior to the anterior scalene.",
+                    D: "The vein passes anterior, and the artery passes posterior to the anterior scalene.",
+                    E: "The vein passes medial, and the artery passes lateral to the anterior scalene."
+                },
+                correctAnswer: "D",
+                rationale: "The subclavian vein passes anterior to the anterior scalene muscle, while the subclavian artery passes posterior to it.",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 44: \"Subclavian Vein... Passes anterior to anterior scalene muscle... Subclavian artery passes posterior to anterior scalene muscle\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO6: Discuss the clinical importance of the fascia of the neck and the [specific space].",
+                fullLO: "LO6: Discuss the clinical importance of the fascia of the neck and the retropharyngeal space.",
+                question: "A patient presents with a severe retropharyngeal abscess. The physician is concerned about the spread of infection into the posterior mediastinum. This \"danger space\" is located between which two fascial layers?",
+                options: {
+                    A: "Buccopharyngeal fascia and prevertebral fascia",
+                    B: "Investing fascia and muscular part of pretracheal fascia",
+                    C: "Investing fascia and visceral part of pretracheal fascia",
+                    D: "Pretracheal fascia and carotid sheath",
+                    E: "Superficial cervical fascia and investing fascia"
+                },
+                correctAnswer: "A",
+                rationale: "The retropharyngeal space (\"Danger space\") is located between the buccopharyngeal fascia (anteriorly) and the prevertebral fascia (posteriorly). It extends from the base of the skull to the diaphragm.",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 10: \"Retropharyngeal space (“Danger space”)... Between buccopharyngeal fascia and prevertebral fascia\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO6: Discuss the clinical importance of the fascia of the neck and the [specific space].",
+                fullLO: "LO6: Discuss the clinical importance of the fascia of the neck and the retropharyngeal space.",
+                question: "A medical student is identifying structures within the carotid sheath during a dissection. Which of the following nerves is normally found within this fascial compartment?",
+                options: {
+                    A: "Ansa cervicalis",
+                    B: "Hypoglossal nerve (CN XII)",
+                    C: "Phrenic nerve",
+                    D: "Sympathetic trunk",
+                    E: "Vagus nerve (CN X)"
+                },
+                correctAnswer: "E",
+                rationale: "The contents of the carotid sheath are the Internal Jugular Vein, Common Carotid Artery, and Vagus Nerve (CN X).",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 9: \"Carotid sheath... Contents: Internal jugular vein, Common carotid artery, Vagus nerve (CN X)\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO7: Describe the cervical viscera ([larynx, trachea, thyroid, and parathyroid glands]).",
+                fullLO: "LO7: Describe the cervical viscera (larynx, trachea, thyroid, and parathyroid glands).",
+                question: "A patient is diagnosed with a tumor involving the pyramidal lobe of the thyroid gland. This structure is a remnant of which embryonic structure?",
+                options: {
+                    A: "Branchial cleft cyst",
+                    B: "Cervical sinus",
+                    C: "Foramen cecum",
+                    D: "Thyroglossal duct",
+                    E: "Ultimobranchial body"
+                },
+                correctAnswer: "D",
+                rationale: "The pyramidal lobe is excess thyroid tissue that may be present in the superior aspect of the thyroid gland. It is a remnant of the embryonic thyroglossal duct.",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 24: \"Pyramidal lobe... Remnant of embryonic thyroglossal duct\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO7: Describe the cervical viscera ([larynx, trachea, thyroid, and parathyroid glands]).",
+                fullLO: "LO7: Describe the cervical viscera (larynx, trachea, thyroid, and parathyroid glands).",
+                question: "During a thyroidectomy, the surgeon must be careful to preserve the parathyroid glands. Where are these glands typically located in relation to the thyroid gland?",
+                options: {
+                    A: "Anterior to the isthmus",
+                    B: "Embedded within the pyramidal lobe",
+                    C: "Lateral to the carotid sheath",
+                    D: "Posterior to the right and left lobes",
+                    E: "Superior to the thyroid cartilage"
+                },
+                correctAnswer: "D",
+                rationale: "The parathyroid glands are located on the posterior side of the right and left lobes of the thyroid gland.",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 24: \"Parathyroid glands... Posterior to right and left lobes of thyroid gland\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO8: Discuss the clinical presentation and/or anatomical basis of the following: [specific conditions].",
+                fullLO: "LO8: Discuss the clinical presentation and/or anatomical basis of the following: subclavian vein puncture, thoracic outlet syndrome, carotid endarterectomy.",
+                question: "A patient with a cervical rib presents with pain, numbness, and tingling in the upper limb. The physician diagnoses Thoracic Outlet Syndrome. These symptoms are primarily caused by compression of which structure?",
+                options: {
+                    A: "Common carotid artery",
+                    B: "Internal jugular vein",
+                    C: "Neurovascular structures (e.g., brachial plexus)",
+                    D: "Phrenic nerve",
+                    E: "Vagus nerve"
+                },
+                correctAnswer: "C",
+                rationale: "Thoracic Outlet Syndrome involves the compression of neurovascular structures (such as the brachial plexus and subclavian vessels) in the thoracic outlet. Symptoms include upper limb numbness and tingling.",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 56: \"Thoracic Outlet Syndrome... Compression of neurovascular structures in the thoracic outlet... Upper limb numbness, tingling, and weakness\""
+            },
+            {
+                section: "Superficial and Deep Neck",
+                maskedLO: "LO8: Discuss the clinical presentation and/or anatomical basis of the following: [specific conditions].",
+                fullLO: "LO8: Discuss the clinical presentation and/or anatomical basis of the following: subclavian vein puncture, thoracic outlet syndrome, carotid endarterectomy.",
+                question: "A patient is undergoing a subclavian vein puncture for central line placement. The needle is inserted inferior to the clavicle. If the needle is advanced too deeply or at an improper angle, which surrounding structure is at risk of puncture, potentially causing a pneumothorax?",
+                options: {
+                    A: "Esophagus",
+                    B: "Heart",
+                    C: "Pleura and lung",
+                    D: "Thoracic duct",
+                    E: "Trachea"
+                },
+                correctAnswer: "C",
+                rationale: "Surrounding structures to be aware of during subclavian vein puncture include the pleura and lung. Puncture can lead to pneumothorax.",
+                source: "Superficial_and_Deep_Neck.pdf, Slide 45: \"Subclavian Vein Puncture... Surrounding structures to be aware of: Pleura and lung\""
+            },
+
+            // --- Section 2: Coronary Artery Disease ---
+            {
+                section: "Coronary Artery Disease",
+                maskedLO: "LO1: Describe coronary artery anatomy and relate vessel to [area supplied].",
+                fullLO: "LO1: Describe coronary artery anatomy and relate vessel to area of the heart supplied",
+                question: "A patient suffers a myocardial infarction involving the lateral wall of the left ventricle. Angiography reveals an occlusion in a branch of the left coronary artery. Which vessel is most likely occluded?",
+                options: {
+                    A: "Acute marginal branch",
+                    B: "Left anterior descending artery",
+                    C: "Left circumflex artery",
+                    D: "Posterior descending artery",
+                    E: "Right coronary artery"
+                },
+                correctAnswer: "C",
+                rationale: "The left circumflex artery gives rise to obtuse marginal branches which supply the lateral wall of the left ventricle.",
+                source: "Coronary_Artery_Disease.pdf, Slide 3: \"Left circumflex... Obtuse marginal branches\" & Diagram showing Circumflex supplying lateral area"
+            },
+            {
+                section: "Coronary Artery Disease",
+                maskedLO: "LO1: Describe coronary artery anatomy and relate vessel to [area supplied].",
+                fullLO: "LO1: Describe coronary artery anatomy and relate vessel to area of the heart supplied",
+                question: "During a coronary angiogram, the Right Coronary Artery (RCA) is visualized. Which of the following branches typically arises from the RCA to supply the posterior aspect of the heart?",
+                options: {
+                    A: "Diagonal branch",
+                    B: "Left Anterior Descending",
+                    C: "Obtuse Marginal",
+                    D: "Posterior Descending Artery",
+                    E: "Septal perforator"
+                },
+                correctAnswer: "D",
+                rationale: "The Right Coronary Artery gives rise to the Posterior Descending Artery (in right-dominant circulation, which is implied by the slide listing it under RCA).",
+                source: "Coronary_Artery_Disease.pdf, Slide 3: \"Right coronary artery... Posterior descending artery*\""
+            },
+            {
+                section: "Coronary Artery Disease",
+                maskedLO: "LO2: Describe the mechanism of acute coronary syndromes",
+                fullLO: "LO2: Describe the mechanism of acute coronary syndromes",
+                question: "A 55-year-old male presents with severe chest pain. He is diagnosed with an Acute Coronary Syndrome (ACS). The underlying pathophysiology of this acute event most likely involves:",
+                options: {
+                    A: "Gradual narrowing of the vessel lumen by stable plaque",
+                    B: "Rupture of a vulnerable plaque followed by thrombosis",
+                    C: "Spasm of a normal coronary artery",
+                    D: "Stable calcification of the arterial wall",
+                    E: "Vasodilation of the coronary arterioles"
+                },
+                correctAnswer: "B",
+                rationale: "ACS (Unstable Angina, NSTEMI, STEMI) is caused by atherothrombosis, where a thrombus is superimposed on an atherosclerotic plaque (plaque rupture).",
+                source: "Coronary_Artery_Disease.pdf, Slide 17: \"Atherothrombosis: Thrombus Superimposed on Atherosclerotic Plaque => Acute Coronary Syndrome (ACS)\""
+            },
+            {
+                section: "Coronary Artery Disease",
+                maskedLO: "LO2: Describe the mechanism of acute coronary syndromes",
+                fullLO: "LO2: Describe the mechanism of acute coronary syndromes",
+                question: "In the pathogenesis of atherosclerosis, modified LDL is taken up by macrophages in the arterial wall. This process leads directly to the formation of:",
+                options: {
+                    A: "Calcified nodules",
+                    B: "Fibrous caps",
+                    C: "Foam cells",
+                    D: "Platelet plugs",
+                    E: "Smooth muscle proliferation"
+                },
+                correctAnswer: "C",
+                rationale: "The uptake of modified LDL by macrophages leads to the formation of foam cells and fatty streaks.",
+                source: "Coronary_Artery_Disease.pdf, Slide 10: \"Uptake of Modified LDL by Macrophages... Formation of foam cells\""
+            },
+            {
+                section: "Coronary Artery Disease",
+                maskedLO: "LO3: Recognize the symptoms of both chronic coronary atherosclerosis and acute coronary syndromes",
+                fullLO: "LO3: Recognize the symptoms of both chronic coronary atherosclerosis and acute coronary syndromes",
+                question: "A 60-year-old female complains of chest pain that occurs only during physical exertion, such as walking uphill. The pain lasts for about 5 minutes and is relieved by rest. This presentation is most characteristic of:",
+                options: {
+                    A: "Acute Myocardial Infarction",
+                    B: "Non-ST-elevation MI",
+                    C: "Stable Angina",
+                    D: "Unstable Angina",
+                    E: "Variant Angina"
+                },
+                correctAnswer: "C",
+                rationale: "Stable angina occurs when the heart works harder (exertion), lasts a short time (5 mins or less), and is relieved by rest or medicine.",
+                source: "Coronary_Artery_Disease.pdf, Slide 18: \"STABLE ANGINA... Occurs when the heart must work harder... usually during physical exertion... relieved by rest or medicine\""
+            },
+            {
+                section: "Coronary Artery Disease",
+                maskedLO: "LO3: Recognize the symptoms of both chronic coronary atherosclerosis and acute coronary syndromes",
+                fullLO: "LO3: Recognize the symptoms of both chronic coronary atherosclerosis and acute coronary syndromes",
+                question: "A patient presents to the ER with persistent, vice-like central chest pain that started while watching TV. He has associated sweating and shortness of breath. The pain has persisted for 30 minutes and was not relieved by rest. These symptoms are most suggestive of:",
+                options: {
+                    A: "Acid reflux",
+                    B: "Acute Coronary Syndrome (ACS)",
+                    C: "Chronic stable angina",
+                    D: "Costochondritis",
+                    E: "Pneumonia"
+                },
+                correctAnswer: "B",
+                rationale: "ACS symptoms include persistent vice-like central chest pain, sweating, shortness of breath, and feeling sick/vomiting. It is not the predictable, exertion-related pain of stable angina.",
+                source: "Coronary_Artery_Disease.pdf, Slide 18: \"ACS... Persistent, vice-like central chest pain... Sweating... Shortness of breath\""
+            },
+            {
+                section: "Coronary Artery Disease",
+                maskedLO: "LO4: Discuss various diagnostic test and their role in evaluating patients with suspected [condition].",
+                fullLO: "LO4: Discuss various diagnostic test and their role in evaluating patients with suspected coronary artery disease",
+                question: "A patient with suspected coronary artery disease is undergoing a diagnostic evaluation. The physician orders a test that allows for direct visualization of the coronary lumen and provides the ability to intervene if a blockage is found. Which test was ordered?",
+                options: {
+                    A: "Coronary angiogram (Cardiac Catheterization)",
+                    B: "Coronary calcium scoring",
+                    C: "CT angiography",
+                    D: "Exercise ECG",
+                    E: "Nuclear perfusion imaging"
+                },
+                correctAnswer: "A",
+                rationale: "Coronary angiogram allows for direct visualization of the coronary lumen and the ability to intervene (e.g., stent placement).",
+                source: "Coronary_Artery_Disease.pdf, Slide 33: \"Coronary angiogram... Pro: Direct visualization of the coronary lumen... Ability to intervene\""
+            },
+            {
+                section: "Coronary Artery Disease",
+                maskedLO: "LO4: Discuss various diagnostic test and their role in evaluating patients with suspected [condition].",
+                fullLO: "LO4: Discuss various diagnostic test and their role in evaluating patients with suspected coronary artery disease",
+                question: "A 30-year-old patient with atypical chest pain is evaluated with a Coronary CT Angiography (CCTA). A major limitation of this non-invasive test is:",
+                options: {
+                    A: "It cannot identify native coronary disease.",
+                    B: "It provides no functional information, only anatomic data.",
+                    C: "It requires arterial puncture.",
+                    D: "It requires exercise on a treadmill.",
+                    E: "It uses no radiation."
+                },
+                correctAnswer: "B",
+                rationale: "A \"Con\" of CT angiography is that it provides no functional information, only anatomic. It also has a high radiation dose.",
+                source: "Coronary_Artery_Disease.pdf, Slide 30: \"CT angiography... Con... No functional information, only anatomic\""
+            },
+            {
+                section: "Coronary Artery Disease",
+                maskedLO: "LO5: Discuss the treatment options for symptomatic [condition].",
+                fullLO: "LO5: Discuss the treatment options for symptomatic coronary artery disease",
+                question: "A patient with stable angina is started on medical therapy. The physician prescribes a beta-blocker. What is the primary mechanism by which beta-blockers relieve anginal symptoms?",
+                options: {
+                    A: "decreasing myocardial oxygen demand",
+                    B: "Dilating coronary arteries to increase supply",
+                    C: "Inhibiting platelet aggregation",
+                    D: "Lowering LDL cholesterol",
+                    E: "preventing calcium entry into myocytes"
+                },
+                correctAnswer: "A",
+                rationale: "Beta-blockers inhibit sympathetic stimulation, thereby decreasing heart rate and contractility, which decreases myocardial oxygen demand.",
+                source: "Coronary_Artery_Disease.pdf, Slide 48: \"Beta-blockers... Inhibit sympathetic stimulation thereby decreasing heart rate and contractility... Decrease myocardial oxygen demand\""
+            },
+            {
+                section: "Coronary Artery Disease",
+                maskedLO: "LO5: Discuss the treatment options for symptomatic [condition].",
+                fullLO: "LO5: Discuss the treatment options for symptomatic coronary artery disease",
+                question: "A patient has chronic angina that is refractory to maximal medical therapy. The angiogram shows multi-vessel disease that is amenable to surgery. Which of the following is an appropriate revascularization strategy?",
+                options: {
+                    A: "Coronary artery bypass grafting (CABG)",
+                    B: "Echocardiography",
+                    C: "Enhanced External Counterpulsation",
+                    D: "Increased dose of statins",
+                    E: "Warfarin therapy"
+                },
+                correctAnswer: "A",
+                rationale: "Treatment for chronic angina refractory to medical therapy includes percutaneous intervention or coronary artery bypass grafting (CABG) surgery.",
+                source: "Coronary_Artery_Disease.pdf, Slide 39: \"Chronic angina refractory to medical therapy... Coronary artery bypass grafting surgery\""
+            },
+
+            // --- Section 3: Heart Failure: Whole Body Integration ---
+            {
+                section: "Heart Failure: Whole Body Integration",
+                maskedLO: "LO1: Use the CO/VR curves and pressure-volume loops to explain initiation of [specific heart failure type].",
+                fullLO: "LO1: Use the CO/VR curves and pressure-volume loops to explain initiation of systolic heart failure.",
+                question: "In the graphical analysis of heart failure, the initial event (Step 1) is a failure of the heart muscle. On the cardiac output/venous return graph, this is represented by:",
+                options: {
+                    A: "A decrease in the slope of the venous return curve",
+                    B: "A decrease in the slope of the cardiac function (contractility) curve",
+                    C: "An increase in Mean Systemic Filling Pressure (MSFP)",
+                    D: "A rightward shift of the venous return curve",
+                    E: "An upward shift of the cardiac function curve"
+                },
+                correctAnswer: "B",
+                rationale: "The initiation of heart failure is represented by a \"failed heart,\" shown as a decrease in the slope of the cardiac function curve (contractility curve). This leads to a new intersection point with lower CO and higher RAP.",
+                source: "Heart_Failure.pdf, Slide 12: \"heart failure is illustrated simply by decreasing the slope of the cardiac function curve\""
+            },
+            {
+                section: "Heart Failure: Whole Body Integration",
+                maskedLO: "LO1: Use the CO/VR curves and pressure-volume loops to explain initiation of [specific heart failure type].",
+                fullLO: "LO1: Use the CO/VR curves and pressure-volume loops to explain initiation of systolic heart failure.",
+                question: "Immediately following a myocardial infarction that impairs contractility (before compensation occurs), which of the following changes is observed in Right Atrial Pressure (RAP) and Cardiac Output (CO)?",
+                options: {
+                    A: "Decreased RAP, Decreased CO",
+                    B: "Decreased RAP, Increased CO",
+                    C: "Increased RAP, Decreased CO",
+                    D: "Increased RAP, Increased CO",
+                    E: "No change in RAP, Decreased CO"
+                },
+                correctAnswer: "C",
+                rationale: "In the acute phase of a failed heart (Step 1), RAP increases because the ventricle can't pump out the blood, and CO decreases.",
+                source: "Heart_Failure.pdf, Slide 8 & 9: \"RAP increased because of decreased cardiac contractility and caused VR and CO to decrease.\""
+            },
+            {
+                section: "Heart Failure: Whole Body Integration",
+                maskedLO: "LO2: Explain how the body senses heart failure and what systems respond...",
+                fullLO: "LO2: Explain how the body senses heart failure and what systems respond...",
+                question: "Following a decline in cardiac output due to heart failure, the body senses the change primarily through a decrease in blood pressure. Which of the following is a compensatory renal response that shifts the venous return curve to the right (Step 2)?",
+                options: {
+                    A: "Decreased renin release",
+                    B: "Increased sodium and water retention",
+                    C: "Inhibition of the sympathetic nervous system",
+                    D: "Pressure natriuresis",
+                    E: "Vasodilation of renal arterioles"
+                },
+                correctAnswer: "B",
+                rationale: "The body compensates by retaining volume (renal sodium retention via RAAS/SNS). This increases blood volume and MSFP, shifting the venous return curve to the right/up to restore CO.",
+                source: "Heart_Failure.pdf, Slide 16 & 19: \"Plus renal sodium retention... renin-angiotensin-aldosterone system... Actions of the SNS... plus the effect of renal volume retention, yields a new venous return curve.\""
+            },
+            {
+                section: "Heart Failure: Whole Body Integration",
+                maskedLO: "LO2: Explain how the body senses heart failure and what systems respond...",
+                fullLO: "LO2: Explain how the body senses heart failure and what systems respond...",
+                question: "In compensated heart failure, the sympathetic nervous system (SNS) is activated. In addition to constricting vessels, the SNS acts directly on the heart. On the cardiac function graph, this SNS stimulation results in:",
+                options: {
+                    A: "A decrease in the slope of the cardiac function curve",
+                    B: "A shift of the curve to the right",
+                    C: "An increase in the slope of the cardiac function curve (increased contractility)",
+                    D: "No change in the curve",
+                    E: "Uncoupling of the Frank-Starling mechanism"
+                },
+                correctAnswer: "C",
+                rationale: "Step 3 of compensation involves cardiac stimulation by the SNS. This increases cardiac contractility, which raises the cardiac function curve (increases the slope) back towards normal.",
+                source: "Heart_Failure.pdf, Slide 25: \"Step 3 shows the additional benefit of cardiac stimulation by the SNS to increase cardiac contractility.\""
+            },
+            {
+                section: "Heart Failure: Whole Body Integration",
+                maskedLO: "LO3: Explain cardiac reserve, and understand how changes in [hemodynamic parameters] affect it.",
+                fullLO: "LO3: Explain cardiac reserve, and understand how changes in preload, afterload, and/or contractility...",
+                question: "Classic treatment for heart failure involved the use of diuretics. Physiologically, diuretics improve the patient's condition by reducing plasma volume and Right Atrial Pressure (RAP). On a pressure-volume loop, this reduction in volume prevents the heart from operating on the descending limb of the Frank-Starling curve by reducing:",
+                options: {
+                    A: "Afterload",
+                    B: "Contractility",
+                    C: "Heart rate",
+                    D: "Preload",
+                    E: "Stroke volume (directly)"
+                },
+                correctAnswer: "D",
+                rationale: "Diuretics decrease RAP and preload. This improves cardiac reserve by moving the cardiac work loop to the left, preventing overstretching (which would be moving beyond the apex of the Frank-Starling curve).",
+                source: "Heart_Failure.pdf, Slide 28 & 30: \"diuretics to decrease RAP and preload... The desired effect to decrease RAP and improve cardiac reserve would be achieved.\""
+            },
+            {
+                section: "Heart Failure: Whole Body Integration",
+                maskedLO: "LO3: Explain cardiac reserve, and understand how changes in [hemodynamic parameters] affect it.",
+                fullLO: "LO3: Explain cardiac reserve, and understand how changes in preload, afterload, and/or contractility...",
+                question: "Although no longer a first-line treatment for the inotropic effect, Digitalis was historically used in heart failure because it blocks the Na/K ATPase. This action leads to an increase in intracellular calcium, which primarily:",
+                options: {
+                    A: "Decreases afterload",
+                    B: "Decreases heart rate",
+                    C: "Increases cardiac contractility",
+                    D: "Increases venous compliance",
+                    E: "Induces diuresis directly"
+                },
+                correctAnswer: "C",
+                rationale: "Digitalis blocks the Na/K ATPase, leading to increased intracellular Ca++, which increases contractility (positive inotropic effect).",
+                source: "Heart_Failure.pdf, Slide 28 & 31: \"positive inotropic agents (digoxin) to boost contractility... It increases contractility.\""
+            },
+            {
+                section: "Heart Failure: Whole Body Integration",
+                maskedLO: "LO4: Define decompensated heart failure and explain the interaction of [blood pressure control systems]...",
+                fullLO: "LO4: Define decompensated heart failure and explain the interaction of blood pressure control systems...",
+                question: "A patient with heart failure enters a state of decompensation. Despite maximal sympathetic activation and fluid retention, cardiac output remains critically low. The continuous fluid retention in this state becomes detrimental because:",
+                options: {
+                    A: "It causes excessive vasodilation.",
+                    B: "It decreases Mean Systemic Filling Pressure (MSFP).",
+                    C: "It leads to pulmonary edema and death.",
+                    D: "It suppresses the Renin-Angiotensin system.",
+                    E: "It washes out the renal medullary gradient."
+                },
+                correctAnswer: "C",
+                rationale: "In decompensated failure, the body cannot restore MAP. It continues to retain sodium/volume, which further worsens cardiac function (vicious cycle), leading to pulmonary edema and death.",
+                source: "Heart_Failure.pdf, Slide 27: \"Decompensated (congestive) heart failure... continues to retain sodium and volume, which further worsens cardiac function... can quickly cause death by pulmonary edema.\""
+            },
+            {
+                section: "Heart Failure: Whole Body Integration",
+                maskedLO: "LO4: Define decompensated heart failure and explain the interaction of [blood pressure control systems]...",
+                fullLO: "LO4: Define decompensated heart failure and explain the interaction of blood pressure control systems...",
+                question: "In decompensated heart failure, the interaction between the failing heart and the blood pressure control systems creates a \"vicious cycle.\" This cycle is driven by the body's attempt to raise blood pressure through:",
+                options: {
+                    A: "Decreasing venous return",
+                    B: "Increasing parasympathetic outflow",
+                    C: "Renal volume retention and vasoconstriction",
+                    D: "Suppression of ADH",
+                    E: "Systemic vasodilation"
+                },
+                correctAnswer: "C",
+                rationale: "The drop in BP activates BP-raising mechanisms (decreased capacitance, renal volume retention). The additional rise in venous return/preload causes further deterioration of the heart, leading to lower BP, more retention, and so on.",
+                source: "Heart_Failure.pdf, Slide 29: \"A drop in blood pressure... activates all the blood pressure-raising mechanisms... This includes decreased capacitance and renal volume retention... This causes a vicious cycle\""
+            }
+        ];
+
+        // --- Core Logic ---
+        const quizRoot = document.getElementById('quiz-root');
+        const themeSelect = document.getElementById('theme-select');
+        const pinBtn = document.getElementById('pin-btn');
+        const mainHeader = document.getElementById('main-header');
+
+        function initQuiz() {
+            // Render Questions
+            let currentSection = "";
+            
+            quizData.forEach((item, index) => {
+                // Insert Section Header if needed
+                if (item.section !== currentSection) {
+                    currentSection = item.section;
+                    const sectionHeader = document.createElement('h2');
+                    sectionHeader.className = 'section-header';
+                    sectionHeader.textContent = currentSection;
+                    quizRoot.appendChild(sectionHeader);
+                }
+
+                // Create Card
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${index}`;
+
+                // Learning Objective (Masked)
+                const loBox = document.createElement('div');
+                loBox.className = 'lo-box';
+                loBox.id = `lo-${index}`;
+                loBox.textContent = item.maskedLO;
+                card.appendChild(loBox);
+
+                // Question Text
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.textContent = `${index + 1}. ${item.question}`;
+                card.appendChild(qText);
+
+                // Options Container
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+
+                for (const [key, value] of Object.entries(item.options)) {
+                    const label = document.createElement('label');
+                    label.className = 'option-label';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question-${index}`;
+                    input.value = key;
+
+                    const span = document.createElement('span');
+                    span.textContent = `${key}. ${value}`;
+
+                    label.appendChild(input);
+                    label.appendChild(span);
+                    optionsGrid.appendChild(label);
+                }
+                card.appendChild(optionsGrid);
+
+                // Check Button
+                const btn = document.createElement('button');
+                btn.className = 'btn-check';
+                btn.textContent = 'Check Answer';
+                btn.onclick = () => checkAnswer(index);
+                card.appendChild(btn);
+
+                // Feedback Container
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+                feedback.id = `feedback-${index}`;
+                card.appendChild(feedback);
+
+                quizRoot.appendChild(card);
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('quizTheme') || 'dark';
+            changeTheme(savedTheme);
+            themeSelect.value = savedTheme;
+
+            // Load saved pin state
+            const savedPinState = localStorage.getItem('headerPinned');
+            // Default to true (pinned) if not set or if set to true
+            if (savedPinState === 'false') {
+                toggleHeader(false); 
+            } else {
+                toggleHeader(true);
+            }
+        }
+
+        function checkAnswer(index) {
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            const feedbackEl = document.getElementById(`feedback-${index}`);
+            const loEl = document.getElementById(`lo-${index}`);
+            const data = quizData[index];
+
+            if (!selected) {
+                alert("Please select an answer.");
+                return;
+            }
+
+            // Reveal LO
+            loEl.textContent = data.fullLO;
+
+            // Generate Feedback HTML
+            const isCorrect = selected.value === data.correctAnswer;
+            
+            let html = `<span class="feedback-header">${isCorrect ? "Correct!" : "Incorrect"}</span>`;
+            if (!isCorrect) {
+                html += `<div>The correct answer is <strong>${data.correctAnswer}</strong>.</div>`;
+            }
+            
+            html += `<div class="rationale"><strong>Rationale:</strong> ${data.rationale}</div>`;
+            html += `<div class="source"><strong>Source:</strong> ${data.source}</div>`;
+
+            feedbackEl.innerHTML = html;
+            feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('quizTheme', themeName);
+        }
+
+        function toggleHeader(forceState) {
+            // Determine current state based on class presence
+            const isCurrentlyPinned = !mainHeader.classList.contains('unpinned');
+            
+            // If forceState is provided (boolean), use it. Otherwise toggle current state.
+            const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyPinned;
+
+            if (newState) {
+                // Pin
+                mainHeader.classList.remove('unpinned');
+                pinBtn.classList.add('pin-active');
+                localStorage.setItem('headerPinned', 'true');
+            } else {
+                // Unpin
+                mainHeader.classList.add('unpinned');
+                pinBtn.classList.remove('pin-active');
+                localStorage.setItem('headerPinned', 'false');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initQuiz);
+
+    </script>
+</body>
+</html>
